@@ -1,0 +1,1735 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BASMA Al Madina Transport LLC - Premium Professional Transport Services</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&family=Oswald:wght@300;400;500;600;700&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary-red: #F59E0B;
+            --dark-red: #D97706;
+            --gold: #F59E0B;
+            --dark-gold: #D97706;
+            --premium-black: #0A0A0A;
+            --steel-gray: #374151;
+            --light-gray: #F8FAFC;
+        }
+        /* Utility to replace Tailwind's text-red-600 with the project's primary red */
+        .text-custom-red {
+            color: var(--primary-red) !important;
+        }
+        
+        body {
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.6;
+            color: #1F2937;
+            scroll-behavior: smooth;
+        }
+        
+        .font-oswald {
+            font-family: 'Oswald', sans-serif;
+        }
+        
+        .font-orbitron {
+            font-family: 'Orbitron', monospace;
+        }
+        
+        /* Premium Hero Section */
+        .hero-premium {
+            position: relative;
+            overflow: hidden;
+            min-height: 100vh;
+            padding-top: 80px;
+        }
+
+        
+        @keyframes backgroundShift {
+            0%, 100% { transform: translateX(0) translateY(0) scale(1); }
+            25% { transform: translateX(-10px) translateY(10px) scale(1.02); }
+            50% { transform: translateX(10px) translateY(-10px) scale(0.98); }
+            75% { transform: translateX(-5px) translateY(5px) scale(1.01); }
+        }
+        
+        /* Enhanced Premium Navigation */
+        .nav-premium {
+            backdrop-filter: blur(20px);
+            border-bottom: 2px solid rgba(245,158,11,0.3);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            background: rgba(255,255,255,0.95);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+        }
+
+        /* Enhanced scrolled state */
+        .nav-premium.nav-scrolled {
+            background: rgba(255,255,255,0.98);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+            border-bottom-color: rgba(245,158,11,0.5);
+        }
+        
+        /* Mobile Menu Hamburger */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            background: transparent;
+            border: none;
+        }
+        
+        .hamburger:hover {
+            background: rgba(245,158,11,0.1);
+        }
+        
+        .hamburger span {
+            width: 28px;
+            height: 3px;
+            background: linear-gradient(45deg, var(--primary-red), var(--dark-red));
+            margin: 3px 0;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border-radius: 2px;
+            transform-origin: center;
+        }
+        
+        /* Hamburger animation when active */
+        .hamburger.active span:nth-child(1) {
+            transform: translateY(9px) rotate(45deg);
+        }
+        
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+            transform: translateX(20px);
+        }
+        
+        .hamburger.active span:nth-child(3) {
+            transform: translateY(-9px) rotate(-45deg);
+        }
+        
+        /* Mobile Menu Overlay */
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 80%;
+            max-width: 400px;
+            height: 100vh;
+            background: linear-gradient(135deg, rgba(255,255,255,0.98), rgba(248,250,252,0.98));
+            backdrop-filter: blur(20px);
+            z-index: 999;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            border-left: 1px solid rgba(245,158,11,0.2);
+            box-shadow: -10px 0 30px rgba(0,0,0,0.1);
+        }
+        
+        .mobile-menu.active {
+            right: 0;
+        }
+        
+        /* Mobile Menu Backdrop */
+        .mobile-backdrop {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.6);
+            z-index: 998;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .mobile-backdrop.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        /* Mobile Menu Content */
+        .mobile-menu-content {
+            padding: 100px 30px 30px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .mobile-nav-link {
+            display: block;
+            padding: 18px 0;
+            color: #1F2937;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-bottom: 1px solid rgba(245,158,11,0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            font-family: 'Oswald', sans-serif;
+        }
+        
+        .mobile-nav-link:hover {
+            color: var(--primary-red);
+            transform: translateX(10px);
+        }
+        
+        .mobile-nav-link::before {
+            content: '';
+            position: absolute;
+            left: -30px;
+            top: 50%;
+            width: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary-red), var(--gold));
+            transform: translateY(-50%);
+            transition: width 0.3s ease;
+        }
+        
+        .mobile-nav-link:hover::before {
+            width: 20px;
+        }
+        
+        /* Mobile Menu Contact Section */
+        .mobile-contact {
+            margin-top: auto;
+            padding-top: 30px;
+            border-top: 1px solid rgba(245,158,11,0.2);
+        }
+        
+        .mobile-contact-item {
+            display: flex;
+            align-items: center;
+            padding: 12px 0;
+            color: #374151;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .mobile-contact-item:hover {
+            color: var(--primary-red);
+        }
+        
+        .mobile-contact-item i {
+            width: 24px;
+            margin-right: 15px;
+            font-size: 1.2rem;
+        }
+        
+        .nav-link-premium {
+            position: relative;
+            padding: 10px 15px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .nav-link-premium::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary-red), var(--gold));
+            transform: translateX(-50%);
+            transition: width 0.4s ease;
+        }
+        
+        .nav-link-premium:hover::before {
+            width: 80%;
+        }
+        
+        .nav-link-premium:hover {
+            color: var(--gold);
+            transform: translateY(-2px);
+        }
+        
+        /* Premium Buttons */
+        .btn-premium {
+            background: linear-gradient(45deg, var(--primary-red), var(--dark-red));
+            border: none;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            box-shadow: 0 8px 25px rgba(245,158,11,0.3);
+        }
+        
+        .btn-premium::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.6s;
+        }
+        
+        .btn-premium:hover::before {
+            left: 100%;
+        }
+        
+        .btn-premium:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(245,158,11,0.4);
+        }
+        .btn-gold {
+            background: linear-gradient(45deg, var(--gold), var(--dark-gold));
+            border: none;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            box-shadow: 0 8px 25px rgba(245,158,11,0.3);
+        }
+        
+        .btn-gold::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.6s;
+        }
+        
+        .btn-gold:hover::before {
+            left: 100%;
+        }
+        
+        .btn-gold:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(245,158,11,0.4);
+        }
+        
+        /* Premium Cards */
+        .card-premium {
+            background: linear-gradient(145deg, #ffffff, #f8fafc);
+            border: 1px solid rgba(245,158,11,0.1);
+            border-radius: 20px;
+            padding: 30px;
+            position: relative;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .card-premium::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-red), var(--gold));
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+        }
+        
+        .card-premium:hover::before {
+            transform: scaleX(1);
+        }
+        
+        .card-premium:hover {
+            transform: translateY(-10px) rotateX(5deg);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+            border-color: var(--primary-red);
+        }
+        
+        /* Premium Icons */
+        .icon-premium {
+            background: linear-gradient(45deg, var(--primary-red), var(--gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-size: 3rem;
+            margin-bottom: 20px;
+            display: inline-block;
+            animation: iconPulse 3s ease-in-out infinite;
+        }
+        
+        @keyframes iconPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+        
+        /* Premium Sections */
+        .section-premium {
+            position: relative;
+            padding: 100px 0;
+        }
+        
+        .section-dark {
+            background: linear-gradient(135deg, var(--premium-black) 0%, #1F2937 100%);
+            color: white;
+        }
+        
+        .section-dark::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                radial-gradient(circle at 25% 25%, rgba(220,38,38,0.1) 0%, transparent 50%),
+                radial-gradient(circle at 75% 75%, rgba(245,158,11,0.1) 0%, transparent 50%);
+        }
+        
+        /* Premium Dividers */
+        .divider-premium {
+            height: 4px;
+            background: linear-gradient(90deg, transparent, var(--primary-red), var(--gold), var(--primary-red), transparent);
+            width: 150px;
+            margin: 0 auto 40px;
+            border-radius: 2px;
+            position: relative;
+        }
+        
+        .divider-premium::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 20px;
+            height: 20px;
+            background: var(--gold);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            border: 3px solid white;
+        }
+        
+        /* Stats Counter Animation */
+        .stats-premium {
+            font-family: 'Orbitron', monospace;
+            font-size: 3rem;
+            font-weight: 900;
+            background: linear-gradient(45deg, var(--primary-red), var(--gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 30px rgba(245,158,11,0.3);
+        }
+        
+        /* Transport Visual Elements */
+        .transport-visual {
+            position: absolute;
+            width: 200px;
+            height: 100px;
+            background: linear-gradient(45deg, var(--primary-red), var(--gold));
+            border-radius: 10px 30px 10px 30px;
+            opacity: 0.1;
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .transport-visual:nth-child(1) {
+            top: 20%;
+            right: 10%;
+            animation-delay: 0s;
+        }
+        
+        .transport-visual:nth-child(2) {
+            bottom: 30%;
+            left: 5%;
+            animation-delay: 2s;
+        }
+        
+        .transport-visual:nth-child(3) {
+            top: 60%;
+            right: 20%;
+            animation-delay: 4s;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(2deg); }
+        }
+        
+        /* Fleet Showcase */
+        .fleet-premium {
+            background: linear-gradient(145deg, #f8fafc, #ffffff);
+            border: 2px solid transparent;
+            background-clip: padding-box;
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+        
+        .fleet-premium::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            padding: 2px;
+            background: linear-gradient(45deg, var(--primary-red), var(--gold), var(--primary-red));
+            border-radius: inherit;
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask-composite: exclude;
+        }
+        
+        /* Professional Testimonials */
+        .testimonial-premium {
+            background: linear-gradient(145deg, #ffffff, #f8fafc);
+            border-left: 6px solid var(--gold);
+            border-radius: 15px;
+            padding: 30px;
+            position: relative;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+        }
+        
+        .testimonial-premium::before {
+            content: '"';
+            position: absolute;
+            top: -10px;
+            right: 20px;
+            font-size: 6rem;
+            color: var(--primary-red);
+            opacity: 0.3;
+            font-family: serif;
+        }
+        
+        /* Process Steps */
+        .process-premium {
+            position: relative;
+            text-align: center;
+            padding: 30px;
+        }
+        
+        .process-premium::after {
+            content: '';
+            position: absolute;
+            top: 30px;
+            right: -50px;
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-red), var(--gold));
+            border-radius: 2px;
+        }
+        
+        .process-premium:last-child::after {
+            display: none;
+        }
+        
+        .process-number {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, var(--primary-red), var(--gold));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-family: 'Orbitron', monospace;
+            font-size: 2rem;
+            font-weight: 900;
+            color: white;
+            box-shadow: 0 10px 25px rgba(245,158,11,0.3);
+        }
+        
+        /* Contact Form Premium */
+        .form-premium {
+            background: linear-gradient(145deg, #ffffff, #f8fafc);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+            border: 1px solid rgba(245,158,11,0.1);
+        }
+        
+        .input-premium {
+            border: 2px solid #e5e7eb;
+            border-radius: 10px;
+            padding: 15px 20px;
+            transition: all 0.3s ease;
+            background: rgba(255,255,255,0.9);
+        }
+        
+        .input-premium:focus {
+            border-color: var(--primary-red);
+            box-shadow: 0 0 20px rgba(245,158,11,0.2);
+            background: white;
+            outline: none;
+        }
+        
+        /* Typography Enhancements */
+        .title-premium {
+            background: linear-gradient(45deg, var(--premium-black), var(--steel-gray));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 900;
+            position: relative;
+        }
+        
+        .title-accent {
+            color: var(--primary-red);
+            position: relative;
+        }
+        
+        /* Floating Action Button */
+        .fab-premium {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, var(--primary-red), var(--gold));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            box-shadow: 0 10px 30px rgba(245,158,11,0.4);
+            z-index: 1000;
+            transition: all 0.3s ease;
+            animation: pulse 2s infinite;
+        }
+        
+        .fab-premium:hover {
+            transform: scale(1.1);
+            box-shadow: 0 15px 40px rgba(245,158,11,0.6);
+        }
+        
+        @keyframes pulse {
+            0% { box-shadow: 0 10px 30px rgba(245,158,11,0.4); }
+            50% { box-shadow: 0 10px 30px rgba(245,158,11,0.8); }
+            100% { box-shadow: 0 10px 30px rgba(245,158,11,0.4); }
+        }
+        
+        /* Responsive Enhancements */
+        @media (max-width: 1024px) {
+            .hamburger {
+                display: flex;
+            }
+            
+            .desktop-nav {
+                display: none !important;
+            }
+            
+            .desktop-call-btn {
+                display: none !important;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .hero-premium {
+                padding-top: 100px;
+                min-height: 90vh;
+            }
+            
+            .stats-premium {
+                font-size: 2rem;
+            }
+            
+            .process-premium::after {
+                display: none;
+            }
+            
+            .transport-visual {
+                display: none;
+            }
+            
+            .section-premium {
+                padding: 60px 0;
+            }
+            
+            .mobile-menu {
+                width: 90%;
+            }
+            
+            .nav-premium {
+                padding: 12px 0;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .hero-premium {
+                padding-top: 90px;
+            }
+            
+            .mobile-menu-content {
+                padding: 80px 20px 20px;
+            }
+        }
+        
+        /* Print Optimization for PDF Export */
+        @media print {
+            * {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+            
+            .fixed {
+                position: static !important;
+            }
+            
+            .fab-premium, .mobile-menu, .mobile-backdrop, .hamburger {
+                display: none !important;
+            }
+            
+            body {
+                background: white !important;
+            }
+            
+            .section-premium {
+                page-break-inside: avoid;
+                padding: 40px 0 !important;
+            }
+            
+            .hero-premium {
+                min-height: 60vh !important;
+                padding-top: 0 !important;
+            }
+            
+            .nav-premium {
+                position: static !important;
+                box-shadow: none !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Premium Navigation -->
+    <header class="nav-premium">
+        <nav class="container mx-auto px-6 py-4">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center space-x-4">
+                    <div class="w-12 h-12 bg-gradient-to-r from-red-600 to-yellow-500 rounded-full flex items-center justify-center">
+                        <i class="fas fa-truck text-white text-xl"></i>
+                    </div>
+                    <div>
+                        <h1 class="font-orbitron text-2xl font-bold">BASMA Al Madina</h1>
+                        <p class="text-sm font-oswald uppercase tracking-wider">Transport LLC</p>
+                    </div>
+                </div>
+                
+                <!-- Desktop Navigation -->
+                <div class="desktop-nav hidden lg:flex space-x-8">
+                    <a href="#home" class="nav-link-premium">Home</a>
+                    <a href="#about" class="nav-link-premium">About</a>
+                    <a href="#services" class="nav-link-premium">Services</a>
+                    <a href="#fleet" class="nav-link-premium">Fleet</a>
+                    <a href="#contact" class="nav-link-premium">Contact</a>
+                </div>
+                
+                <!-- Desktop Call Button -->
+                <a href="tel:+971509092032" class="desktop-call-btn btn-premium text-white text-sm">
+                    <i class="fas fa-phone mr-2"></i>CALL NOW
+                </a>
+                
+                <!-- Mobile Hamburger Menu -->
+                <button class="hamburger" id="hamburgerBtn" aria-label="Toggle mobile menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Mobile Menu Backdrop -->
+    <div class="mobile-backdrop" id="mobileBackdrop"></div>
+    
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <div class="mobile-menu-content">
+            <nav>
+                <a href="#home" class="mobile-nav-link">Home</a>
+                <a href="#about" class="mobile-nav-link">About</a>
+                <a href="#services" class="mobile-nav-link">Services</a>
+                <a href="#fleet" class="mobile-nav-link">Fleet</a>
+                <a href="#contact" class="mobile-nav-link">Contact</a>
+            </nav>
+            
+            <div class="mobile-contact">
+                <h4 class="font-oswald text-lg font-bold mb-4 text-gray-800">Contact Us</h4>
+                <a href="tel:+971509092032" class="mobile-contact-item">
+                    <i class="fas fa-phone"></i>
+                    <span>+971 50 90 920 32</span>
+                </a>
+                <a href="tel:+971506548395" class="mobile-contact-item">
+                    <i class="fas fa-mobile-alt"></i>
+                    <span>+971 50 65 48 395</span>
+                </a>
+                <a href="mailto:basmaalmadinatransportllc@gmail.com" class="mobile-contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <span>Email Us</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Premium Hero Section -->
+    <section id="home" class="hero-premium relative flex items-center">
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="max-w-6xl mx-auto text-center">
+                <h1 class="font-oswald text-6xl lg:text-8xl font-bold mb-8 leading-none">
+                    PREMIUM <span class="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-yellow-500">TRANSPORT</span><br>
+                    SOLUTIONS
+                </h1>
+                <p class="text-xl lg:text-3xl mb-12 text-black-200 font-light max-w-4xl mx-auto">
+                    Elite Transport & Industrial Services | Dubai's Most Trusted Partner for Drainage, Water Supply, Diesel Trading & Logistics Excellence
+                </p>
+                <div class="flex flex-col lg:flex-row justify-center items-center space-y-6 lg:space-y-0 lg:space-x-8 mb-16">
+                    <a href="#services" class="btn-premium text-white px-10 py-4 text-lg">
+                        <i class="fas fa-cogs mr-3"></i>EXPLORE SERVICES
+                    </a>
+                   
+                    <a href="#contact" class="btn-gold text-white px-10 py-4 text-lg">
+                        <i class="fas fa-phone mr-3"></i>GET PREMIUM QUOTE
+                    </a>
+                </div>
+                
+                <!-- Premium Stats -->
+                <div class="grid grid-cols-2 lg:grid-cols-4 gap-8">
+                    <div class="text-center">
+                        <div class="stats-premium">24 / 7</div>
+                        <p class="text-gray-500 font-oswald uppercase tracking-wide">Emergency Service</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="stats-premium">40+</div>
+                        <p class="text-gray-500 font-oswald uppercase tracking-wide">Years Excellence</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="stats-premium">1000+</div>
+                        <p class="text-gray-500 font-oswald uppercase tracking-wide">Satisfied Clients</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="stats-premium">100%</div>
+                        <p class="text-gray-500 font-oswald uppercase tracking-wide">Quality Guarantee</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Premium About Section -->
+    <section id="about" class="section-premium bg-gray-50">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="font-oswald text-5xl font-bold title-premium mb-6">About BASMA Al Madina Transport LLC</h2>
+                <div class="divider-premium"></div>
+                <p class="text-gray-600 max-w-4xl mx-auto text-xl leading-relaxed">
+                    Dubai's premier transport and industrial services company, setting the gold standard for excellence, reliability, and professional service delivery across the UAE.
+                </p>
+            </div>
+            
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+                <div>
+                    <h3 class="font-oswald text-3xl font-bold mb-8 title-premium">Our Vision & Mission</h3>
+                    <p class="text-gray-700 mb-8 text-lg leading-relaxed">
+                        To revolutionize the transport industry in Dubai through innovative solutions, cutting-edge technology, and unwavering commitment to excellence. We deliver comprehensive transport and industrial services that exceed expectations and drive business success.
+                    </p>
+                    
+                        <div class="grid grid-cols-2 gap-6 mb-8">
+                        <div class="flex items-center">
+                            <i class="fas fa-award text-custom-red mr-4 text-2xl"></i>
+                            <span class="font-bold text-lg">ISO Certified Excellence</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-shield-alt text-custom-red mr-4 text-2xl"></i>
+                            <span class="font-bold text-lg">24/7 Premium Support</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-users-cog text-custom-red mr-4 text-2xl"></i>
+                            <span class="font-bold text-lg">Expert Professionals</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-truck text-custom-red mr-4 text-2xl"></i>
+                            <span class="font-bold text-lg">Modern Fleet</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="space-y-6">
+                    <div class="card-premium">
+                        <h4 class="font-oswald text-2xl font-bold mb-4 title-premium">Professional Excellence</h4>
+                        <p class="text-gray-600 text-lg">Delivering unparalleled quality with state-of-the-art equipment and industry-leading expertise.</p>
+                    </div>
+                    <div class="card-premium">
+                        <h4 class="font-oswald text-2xl font-bold mb-4 title-premium">Customer-Centric Approach</h4>
+                        <p class="text-gray-600 text-lg">Building lasting partnerships through exceptional service, transparency, and competitive excellence.</p>
+                    </div>
+                    <div class="card-premium">
+                        <h4 class="font-oswald text-2xl font-bold mb-4 title-premium">Innovation Leadership</h4>
+                        <p class="text-gray-600 text-lg">Continuously advancing our capabilities to meet the evolving demands of modern industry.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Premium Services Section -->
+    <section id="services" class="section-premium bg-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="font-oswald text-5xl font-bold title-premium mb-6">Comprehensive Transport Solutions</h2>
+                <div class="divider-premium"></div>
+                <p class="text-gray-600 max-w-4xl mx-auto text-xl leading-relaxed">
+                    Premium transport and industrial services engineered to meet every business and residential requirement with unmatched precision and reliability.
+                </p>
+            </div>
+            
+            <div class="grid lg:grid-cols-4 md:grid-cols-2 gap-8 mb-16">
+                <div class="card-premium text-center group">
+                    <i class="icon-premium fas fa-tools"></i>
+                    <h3 class="font-oswald text-xl font-bold mb-4 title-premium">Drainage Line Cleaning</h3>
+                    <p class="text-gray-600 leading-relaxed">Advanced drainage solutions using cutting-edge equipment for complete line maintenance and restoration.</p>
+                </div>
+                
+                <div class="card-premium text-center group">
+                    <i class="icon-premium fas fa-truck"></i>
+                    <h3 class="font-oswald text-xl font-bold mb-4 title-premium">Heavy Tipper Trucks</h3>
+                    <p class="text-gray-600 leading-relaxed">Professional heavy-duty tipper services for construction, mining, and large-scale waste management projects.</p>
+                </div>
+                
+                <div class="card-premium text-center group">
+                    <i class="icon-premium fas fa-water"></i>
+                    <h3 class="font-oswald text-xl font-bold mb-4 title-premium">Drainage Water Management</h3>
+                    <p class="text-gray-600 leading-relaxed">Comprehensive drainage water collection, treatment, and disposal services with environmental compliance.</p>
+                </div>
+                
+                <div class="card-premium text-center group">
+                    <i class="icon-premium fas fa-toilet"></i>
+                    <h3 class="font-oswald text-xl font-bold mb-4 title-premium">Septic Tank Services</h3>
+                    <p class="text-gray-600 leading-relaxed">Complete septic system maintenance, cleaning, and repair services for residential and commercial properties.</p>
+                </div>
+            </div>
+            
+            <div class="grid lg:grid-cols-4 md:grid-cols-2 gap-8">
+                <div class="card-premium text-center group">
+                    <i class="icon-premium fas fa-gas-pump"></i>
+                    <h3 class="font-oswald text-xl font-bold mb-4 title-premium">Premium Diesel Trading</h3>
+                    <p class="text-gray-600 leading-relaxed">High-quality diesel supply and trading solutions for industrial, commercial, and heavy machinery operations.</p>
+                </div>
+                
+                <div class="card-premium text-center group">
+                    <i class="icon-premium fas fa-tint"></i>
+                    <h3 class="font-oswald text-xl font-bold mb-4 title-premium">Salt Water Supply</h3>
+                    <p class="text-gray-600 leading-relaxed">Industrial-grade salt water supply services for construction, cleaning, and specialized commercial applications.</p>
+                </div>
+                
+                <div class="card-premium text-center group">
+                    <i class="icon-premium fas fa-faucet"></i>
+                    <h3 class="font-oswald text-xl font-bold mb-4 title-premium">Fresh Water Supply</h3>
+                    <p class="text-gray-600 leading-relaxed">Pure, potable water delivery services for residential, commercial, and emergency supply requirements.</p>
+                </div>
+                
+                <div class="card-premium text-center group">
+                    <i class="icon-premium fas fa-recycle"></i>
+                    <h3 class="font-oswald text-xl font-bold mb-4 title-premium">TSE Water Supply</h3>
+                    <p class="text-gray-600 leading-relaxed">Treated sewage effluent water supply for irrigation, landscaping, and sustainable industrial applications.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Premium Excellence Section -->
+    <section class="section-premium section-dark relative">
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="text-center mb-16">
+                <h2 class="font-oswald text-5xl font-bold mb-6">Why Choose Premium Transport Excellence?</h2>
+                <div class="divider-premium"></div>
+            </div>
+            
+            <div class="grid lg:grid-cols-3 gap-12">
+                <div class="text-center">
+                    <div class="w-24 h-24 bg-gradient-to-r from-red-600 to-yellow-500 rounded-full flex items-center justify-center mx-auto mb-8">
+                        <i class="fas fa-trophy text-4xl text-white"></i>
+                    </div>
+                    <h3 class="font-oswald text-2xl font-bold mb-6">Industry Leadership</h3>
+                    <p class="text-gray-300 text-lg leading-relaxed">Over 15 years of proven excellence in Dubai's transport sector with an unmatched reputation for quality and reliability.</p>
+                </div>
+                
+                <div class="text-center">
+                    <div class="w-24 h-24 bg-gradient-to-r from-red-600 to-yellow-500 rounded-full flex items-center justify-center mx-auto mb-8">
+                        <i class="fas fa-clock text-4xl text-white"></i>
+                    </div>
+                    <h3 class="font-oswald text-2xl font-bold mb-6">24/7 Premium Support</h3>
+                    <p class="text-gray-300 text-lg leading-relaxed">Round-the-clock emergency response with guaranteed rapid deployment and immediate problem resolution.</p>
+                </div>
+                
+                <div class="text-center">
+                    <div class="w-24 h-24 bg-gradient-to-r from-red-600 to-yellow-500 rounded-full flex items-center justify-center mx-auto mb-8">
+                        <i class="fas fa-cogs text-4xl text-white"></i>
+                    </div>
+                    <h3 class="font-oswald text-2xl font-bold mb-6">Advanced Technology</h3>
+                    <p class="text-gray-300 text-lg leading-relaxed">State-of-the-art equipment and innovative solutions delivered by certified professionals with extensive expertise.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Premium Fleet Showcase -->
+    <section id="fleet" class="section-premium bg-gray-50">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="font-oswald text-5xl font-bold title-premium mb-6">Our Premium Fleet & Equipment</h2>
+                <div class="divider-premium"></div>
+                <p class="text-gray-600 max-w-4xl mx-auto text-xl leading-relaxed">
+                    State-of-the-art vehicles and equipment maintained to the highest industry standards for optimal performance and reliability.
+                </p>
+            </div>
+            
+            <div class="grid lg:grid-cols-3 gap-12">
+                <div class="fleet-premium p-8 text-center">
+                    <i class="fas fa-truck text-8xl text-custom-red mb-6"></i>
+                    <h3 class="font-oswald text-2xl font-bold mb-6 title-premium">Heavy Duty Transport Fleet</h3>
+                    <p class="text-gray-600 mb-6 text-lg">Latest generation trucks equipped with advanced safety systems and GPS tracking for efficient operations.</p>
+                    <div class="space-y-4">
+                        <div class="flex justify-between items-center">
+                            <span class="font-semibold">Capacity Range:</span>
+                            <span class="text-custom-red font-bold">20-50 Tons</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="font-semibold">Fleet Size:</span>
+                            <span class="text-custom-red font-bold">25+ Vehicles</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="font-semibold">Technology:</span>
+                            <span class="text-custom-red font-bold">GPS Tracked</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="fleet-premium p-8 text-center">
+                    <i class="fas fa-cog text-8xl text-custom-red mb-6"></i>
+                    <h3 class="font-oswald text-2xl font-bold mb-6 title-premium">Advanced Cleaning Systems</h3>
+                    <p class="text-gray-600 mb-6 text-lg">Professional-grade drainage and septic cleaning equipment with cutting-edge technology.</p>
+                    <div class="space-y-4">
+                        <div class="flex justify-between items-center">
+                            <span class="font-semibold">Pressure Rating:</span>
+                            <span class="text-custom-red font-bold">Ultra High-Pressure</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="font-semibold">Efficiency:</span>
+                            <span class="text-custom-red font-bold">99.9% Clean</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="font-semibold">Safety:</span>
+                            <span class="text-custom-red font-bold">Fully Certified</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="fleet-premium p-8 text-center">
+                    <i class="fas fa-water text-8xl text-custom-red mb-6"></i>
+                    <h3 class="font-oswald text-2xl font-bold mb-6 title-premium">Specialized Water Tankers</h3>
+                    <p class="text-gray-600 mb-6 text-lg">Food-grade certified tankers for safe and hygienic water supply and liquid transport services.</p>
+                    <div class="space-y-4">
+                        <div class="flex justify-between items-center">
+                            <span class="font-semibold">Volume Capacity:</span>
+                            <span class="text-custom-red font-bold">5,000-15,000L</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="font-semibold">Certification:</span>
+                            <span class="text-custom-red font-bold">Food Grade</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="font-semibold">Material:</span>
+                            <span class="text-custom-red font-bold">Stainless Steel</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Service Areas -->
+    <section class="section-premium bg-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="font-oswald text-5xl font-bold title-premium mb-6">Comprehensive Service Coverage</h2>
+                <div class="divider-premium"></div>
+                <p class="text-gray-600 max-w-4xl mx-auto text-xl leading-relaxed">
+                    Extensive coverage across Dubai and the UAE with rapid response capabilities and local expertise.
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-4 gap-8">
+                <div class="card-premium text-center">
+                    <i class="fas fa-building text-4xl text-custom-red mb-4"></i>
+                    <h3 class="font-bold text-lg mb-2">Dubai Marina</h3>
+                    <p class="text-gray-600">Premium residential services</p>
+                </div>
+                <div class="card-premium text-center">
+                    <i class="fas fa-city text-4xl text-custom-red mb-4"></i>
+                    <h3 class="font-bold text-lg mb-2">Downtown Dubai</h3>
+                    <p class="text-gray-600">Commercial excellence</p>
+                </div>
+                <div class="card-premium text-center">
+                    <i class="fas fa-home text-4xl text-custom-red mb-4"></i>
+                    <h3 class="font-bold text-lg mb-2">Jumeirah District</h3>
+                    <p class="text-gray-600">Luxury home services</p>
+                </div>
+                <div class="card-premium text-center">
+                    <i class="fas fa-briefcase text-4xl text-custom-red mb-4"></i>
+                    <h3 class="font-bold text-lg mb-2">Business Bay</h3>
+                    <p class="text-gray-600">Corporate solutions</p>
+                </div>
+                <div class="card-premium text-center">
+                    <i class="fas fa-industry text-4xl text-custom-red mb-4"></i>
+                    <h3 class="font-bold text-lg mb-2">Al Quoz Industrial</h3>
+                    <p class="text-gray-600">Our headquarters hub</p>
+                </div>
+                <div class="card-premium text-center">
+                    <i class="fas fa-ship text-4xl text-custom-red mb-4"></i>
+                    <h3 class="font-bold text-lg mb-2">Deira Port</h3>
+                    <p class="text-gray-600">Logistics center</p>
+                </div>
+                <div class="card-premium text-center">
+                    <i class="fas fa-map-marker-alt text-4xl text-custom-red mb-4"></i>
+                    <h3 class="font-bold text-lg mb-2">Sharjah</h3>
+                    <p class="text-gray-600">Extended operations</p>
+                </div>
+                <div class="card-premium text-center">
+                    <i class="fas fa-landmark text-4xl text-custom-red mb-4"></i>
+                    <h3 class="font-bold text-lg mb-2">Abu Dhabi</h3>
+                    <p class="text-gray-600">Capital city services</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Premium Process -->
+    <section class="section-premium section-dark relative">
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="text-center mb-16">
+                <h2 class="font-oswald text-5xl font-bold mb-6">Our Professional Process</h2>
+                <div class="divider-premium"></div>
+            </div>
+            
+            <div class="grid lg:grid-cols-4 gap-8">
+                <div class="process-premium">
+                    <div class="process-number">1</div>
+                    <h3 class="font-oswald text-2xl font-bold mb-4">Consultation</h3>
+                    <p class="text-gray-300 text-lg">Immediate response with expert consultation and detailed requirement analysis.</p>
+                </div>
+                <div class="process-premium">
+                    <div class="process-number">2</div>
+                    <h3 class="font-oswald text-2xl font-bold mb-4">Assessment</h3>
+                    <p class="text-gray-300 text-lg">Comprehensive evaluation with transparent pricing and timeline specification.</p>
+                </div>
+                <div class="process-premium">
+                    <div class="process-number">3</div>
+                    <h3 class="font-oswald text-2xl font-bold mb-4">Execution</h3>
+                    <p class="text-gray-300 text-lg">Professional implementation with cutting-edge equipment and certified techniques.</p>
+                </div>
+                <div class="process-premium">
+                    <div class="process-number">4</div>
+                    <h3 class="font-oswald text-2xl font-bold mb-4">Completion</h3>
+                    <p class="text-gray-300 text-lg">Quality assurance, thorough cleanup, and satisfaction guarantee delivery.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Premium Testimonials -->
+    <section class="section-premium bg-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="font-oswald text-5xl font-bold title-premium mb-6">Client Success Stories</h2>
+                <div class="divider-premium"></div>
+            </div>
+            
+            <div class="grid lg:grid-cols-3 gap-12">
+                <div class="testimonial-premium">
+                    <div class="flex mb-6">
+                        <i class="fas fa-star text-yellow-400 text-xl"></i>
+                        <i class="fas fa-star text-yellow-400 text-xl"></i>
+                        <i class="fas fa-star text-yellow-400 text-xl"></i>
+                        <i class="fas fa-star text-yellow-400 text-xl"></i>
+                        <i class="fas fa-star text-yellow-400 text-xl"></i>
+                    </div>
+                    <p class="text-gray-700 mb-6 text-lg leading-relaxed">"Outstanding professional service! BASMA Al Madina transformed our drainage infrastructure with precision and efficiency. Their team's expertise is unmatched in Dubai."</p>
+                    <div class="font-bold text-xl text-gray-900">Emirates Construction</div>
+                    <div class="text-custom-red font-semibold">Major Developer</div>
+                </div>
+                
+                <div class="testimonial-premium">
+                    <div class="flex mb-6">
+                        <i class="fas fa-star text-yellow-400 text-xl"></i>
+                        <i class="fas fa-star text-yellow-400 text-xl"></i>
+                        <i class="fas fa-star text-yellow-400 text-xl"></i>
+                        <i class="fas fa-star text-yellow-400 text-xl"></i>
+                        <i class="fas fa-star text-yellow-400 text-xl"></i>
+                    </div>
+                    <p class="text-gray-700 mb-6 text-lg leading-relaxed">"Exceptional water supply services with consistent quality and reliability. Their 24/7 support has been crucial for our operations. Highly recommended!"</p>
+                    <div class="font-bold text-xl text-gray-900">Dubai Marina Properties</div>
+                    <div class="text-custom-red font-semibold">Real Estate Giant</div>
+                </div>
+                
+                <div class="testimonial-premium">
+                    <div class="flex mb-6">
+                        <i class="fas fa-star text-yellow-400 text-xl"></i>
+                        <i class="fas fa-star text-yellow-400 text-xl"></i>
+                        <i class="fas fa-star text-yellow-400 text-xl"></i>
+                        <i class="fas fa-star text-yellow-400 text-xl"></i>
+                        <i class="fas fa-star text-yellow-400 text-xl"></i>
+                    </div>
+                    <p class="text-gray-700 mb-6 text-lg leading-relaxed">"Premium emergency response saved our facility! Lightning-fast deployment, professional execution, and competitive pricing. True industry leaders."</p>
+                    <div class="font-bold text-xl text-gray-900">Al Quoz Industries</div>
+                    <div class="text-custom-red font-semibold">Manufacturing Leader</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Emergency Services -->
+    <section class="section-premium bg-gradient-to-r from-red-600 to-red-700 text-white">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="font-oswald text-5xl font-bold mb-8">24/7 Emergency Response Center</h2>
+            <p class="text-2xl mb-12 max-w-4xl mx-auto font-light">
+                Immediate emergency transport and drainage services available round the clock throughout Dubai and the UAE. 
+                Our rapid response team guarantees swift resolution of any urgent situation.
+            </p>
+            
+            <div class="grid lg:grid-cols-3 gap-12 mb-16">
+                <div>
+                    <i class="fas fa-phone text-6xl mb-6"></i>
+                    <h3 class="font-oswald text-2xl font-bold mb-4">Instant Response</h3>
+                    <p class="text-xl">24/7 hotline with immediate dispatch capability</p>
+                </div>
+                <div>
+                    <i class="fas fa-ambulance text-6xl mb-6"></i>
+                    <h3 class="font-oswald text-2xl font-bold mb-4">Emergency Fleet</h3>
+                    <p class="text-xl">Dedicated emergency vehicles always on standby</p>
+                </div>
+                <div>
+                    <i class="fas fa-stopwatch text-6xl mb-6"></i>
+                    <h3 class="font-oswald text-2xl font-bold mb-4">Rapid Deployment</h3>
+                    <p class="text-xl">Average response time under 20 minutes</p>
+                </div>
+            </div>
+            
+            <a href="tel:+971509092032" class="btn-premium bg-black hover:bg-gray-800 text-white px-12 py-6 text-2xl font-bold">
+                <i class="fas fa-phone mr-3"></i>EMERGENCY HOTLINE: +971 50 90 920 32
+            </a>
+        </div>
+    </section>
+
+    <!-- Leadership Team -->
+    <section class="section-premium bg-gray-50">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="font-oswald text-5xl font-bold title-premium mb-6">Executive Leadership</h2>
+                <div class="divider-premium"></div>
+            </div>
+            
+            <div class="max-w-5xl mx-auto">
+                <div class="card-premium text-center p-12">
+                    <div class="w-40 h-40 bg-gradient-to-r from-red-600 to-yellow-500 rounded-full flex items-center justify-center mx-auto mb-8">
+                        <i class="fas fa-user-tie text-7xl text-white"></i>
+                    </div>
+                    <h3 class="font-oswald text-4xl font-bold title-premium mb-4">Abdullah Sahib Zada</h3>
+                    <p class="text-custom-red font-bold text-xl mb-8 uppercase tracking-wide">Managing Director & CEO</p>
+                    <p class="text-gray-700 mb-12 text-xl leading-relaxed max-w-3xl mx-auto">
+                        Visionary leader driving BASMA Al Madina Transport LLC's excellence with over 20 years of industry expertise. 
+                        Committed to innovation, sustainable growth, and delivering unparalleled customer satisfaction across all our operations.
+                    </p>
+                    <div class="grid md:grid-cols-3 gap-8">
+                        <a href="tel:+971509092032" class="flex items-center justify-center text-custom-red hover:text-black text-lg font-semibold">
+                            <i class="fas fa-phone mr-3 text-2xl"></i>+971 50 90 920 32
+                        </a>
+                        <a href="tel:+971506548395" class="flex items-center justify-center text-custom-red hover:text-black text-lg font-semibold">
+                            <i class="fas fa-mobile-alt mr-3 text-2xl"></i>+971 50 65 48 395
+                        </a>
+                        <a href="mailto:basmaalmadinatransportllc@gmail.com" class="flex items-center justify-center text-custom-red hover:text-black text-lg font-semibold">
+                            <i class="fas fa-envelope mr-3 text-2xl"></i>Executive Email
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Premium Contact Section -->
+    <section id="contact" class="section-premium bg-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="font-oswald text-5xl font-bold title-premium mb-6">Connect with Excellence</h2>
+                <div class="divider-premium"></div>
+                <p class="text-gray-600 max-w-4xl mx-auto text-xl leading-relaxed">
+                    Ready to experience premium transport services? Contact our experts for immediate assistance or comprehensive project consultation.
+                </p>
+            </div>
+            
+            <div class="grid lg:grid-cols-2 gap-16">
+                <div class="form-premium">
+                    <h3 class="font-oswald text-3xl font-bold mb-8 title-premium">Request Premium Quote</h3>
+                    <form class="space-y-6">
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <input type="text" placeholder="Full Name" class="input-premium w-full">
+                            <input type="tel" placeholder="Phone Number" class="input-premium w-full">
+                        </div>
+                        <input type="email" placeholder="Email Address" class="input-premium w-full">
+                        <select class="input-premium w-full">
+                            <option>Select Premium Service</option>
+                            <option>Drainage Line Cleaning</option>
+                            <option>Heavy Tipper Trucks</option>
+                            <option>Septic Tank Services</option>
+                            <option>Water Supply Solutions</option>
+                            <option>Premium Diesel Trading</option>
+                            <option>Emergency Services</option>
+                            <option>Complete Transport Package</option>
+                        </select>
+                        <textarea placeholder="Project Details & Requirements" rows="5" class="input-premium w-full"></textarea>
+                        <button type="submit" class="btn-premium w-full py-4 text-lg">
+                            <i class="fas fa-paper-plane mr-3"></i>REQUEST PREMIUM CONSULTATION
+                        </button>
+                    </form>
+                </div>
+                
+                <div class="space-y-8">
+                    <div class="card-premium">
+                        <h3 class="font-oswald text-2xl font-bold mb-6 title-premium">Executive Contact</h3>
+                        <div class="space-y-6">
+                            <div class="flex items-center">
+                                <i class="fas fa-user-tie text-custom-red text-2xl mr-6"></i>
+                                <div>
+                                    <p class="font-bold text-lg">Managing Director</p>
+                                    <p class="text-gray-600 text-lg">Abdullah Sahib Zada</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-phone text-custom-red text-2xl mr-6"></i>
+                                <div>
+                                    <p class="font-bold text-lg">Primary Hotline</p>
+                                    <a href="tel:+971509092032" class="text-custom-red hover:text-black text-lg font-semibold">+971 50 90 920 32</a>
+                                </div>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-mobile-alt text-custom-red text-2xl mr-6"></i>
+                                <div>
+                                    <p class="font-bold text-lg">Executive Line</p>
+                                    <a href="tel:+971506548395" class="text-custom-red hover:text-black text-lg font-semibold">+971 50 65 48 395</a>
+                                </div>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-envelope text-custom-red text-2xl mr-6"></i>
+                                <div>
+                                    <p class="font-bold text-lg">Executive Email</p>
+                                    <a href="mailto:basmaalmadinatransportllc@gmail.com" class="text-custom-red hover:text-black text-lg font-semibold">basmaalmadinatransportllc@gmail.com</a>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <i class="fas fa-map-marker-alt text-custom-red text-2xl mr-6 mt-1"></i>
+                                <div>
+                                    <p class="font-bold text-lg">Headquarters</p>
+                                    <p class="text-gray-600 text-lg">Al Quoz Industrial Area<br>Dubai, United Arab Emirates</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-gradient-to-r from-red-600 to-red-700 p-8 rounded-xl text-white text-center">
+                        <h4 class="font-oswald text-2xl font-bold mb-4">24/7 Emergency Response</h4>
+                        <p class="mb-6 text-lg">Immediate professional response for urgent transport and drainage requirements</p>
+                        <a href="tel:+971509092032" class="btn-gold text-white px-8 py-3 font-bold">
+                            <i class="fas fa-phone mr-2"></i>EMERGENCY HOTLINE
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Premium Footer -->
+    <footer class="bg-black text-white py-16">
+        <div class="container mx-auto px-6">
+            <div class="grid lg:grid-cols-4 gap-12 mb-12">
+                <div>
+                    <div class="flex items-center space-x-4 mb-6">
+                        <div class="w-16 h-16 bg-gradient-to-r from-red-600 to-yellow-500 rounded-full flex items-center justify-center">
+                            <i class="fas fa-truck text-white text-2xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-orbitron text-2xl font-bold">BASMA Al Madina</h3>
+                            <p class="text-gray-400 font-oswald uppercase tracking-wide">Transport LLC</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-400 mb-6 text-lg leading-relaxed">
+                        Dubai's premier transport and industrial services company, delivering excellence, innovation, and reliability across the UAE.
+                    </p>
+                    <div class="flex space-x-6">
+                        <a href="tel:+971509092032" class="text-red-500 hover:text-yellow-500 transition-colors">
+                            <i class="fab fa-whatsapp text-3xl"></i>
+                        </a>
+                        <a href="mailto:basmaalmadinatransportllc@gmail.com" class="text-red-500 hover:text-yellow-500 transition-colors">
+                            <i class="fas fa-envelope text-3xl"></i>
+                        </a>
+                        <a href="#" class="text-red-500 hover:text-yellow-500 transition-colors">
+                            <i class="fab fa-linkedin text-3xl"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="font-oswald text-xl font-bold mb-6">Premium Services</h4>
+                    <ul class="space-y-3 text-gray-400">
+                        <li><a href="#services" class="hover:text-red-500 text-lg">Drainage Line Cleaning</a></li>
+                        <li><a href="#services" class="hover:text-red-500 text-lg">Heavy Tipper Trucks</a></li>
+                        <li><a href="#services" class="hover:text-red-500 text-lg">Septic Tank Services</a></li>
+                        <li><a href="#services" class="hover:text-red-500 text-lg">Water Supply Solutions</a></li>
+                        <li><a href="#services" class="hover:text-red-500 text-lg">Premium Diesel Trading</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-oswald text-xl font-bold mb-6">Company</h4>
+                    <ul class="space-y-3 text-gray-400">
+                        <li><a href="#about" class="hover:text-red-500 text-lg">About Excellence</a></li>
+                        <li><a href="#fleet" class="hover:text-red-500 text-lg">Our Premium Fleet</a></li>
+                        <li><a href="#contact" class="hover:text-red-500 text-lg">Contact Leadership</a></li>
+                        <li><a href="#services" class="hover:text-red-500 text-lg">Emergency Response</a></li>
+                        <li><a href="#" class="hover:text-red-500 text-lg">Request Quote</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-oswald text-xl font-bold mb-6">Executive Contact</h4>
+                    <div class="space-y-4 text-gray-400">
+                        <div class="flex items-center">
+                            <i class="fas fa-phone text-red-500 mr-4 text-xl"></i>
+                            <span class="text-lg">+971 50 90 920 32</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-envelope text-red-500 mr-4 text-xl"></i>
+                            <a href="mailto:basmaalmadinatransportllc@gmail.com" class="text-lg">Email Now!</a>
+                        </div>
+                        <div class="flex items-start">
+                            <i class="fas fa-map-marker-alt text-red-500 mr-4 text-xl mt-1"></i>
+                            <span class="text-lg">Al Quoz Industrial Area<br>Dubai, U.A.E.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 pt-8">
+                <div class="flex flex-col lg:flex-row justify-between items-center">
+                    <p class="text-gray-400 text-lg mb-4 lg:mb-0">
+                        © 2025 BASMA Al Madina Transport LLC. All rights reserved. Premium Transport Excellence.
+                    </p>
+                    <div class="flex space-x-8 text-gray-400">
+                        <a href="#" class="hover:text-red-500 text-lg">Privacy Policy</a>
+                        <a href="#" class="hover:text-red-500 text-lg">Terms of Service</a>
+                        <a href="#" class="hover:text-red-500 text-lg">Safety Standards</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Premium Floating Action Button -->
+    <a href="tel:+971509092032" class="fab-premium">
+        <i class="fas fa-phone"></i>
+    </a>
+
+    <script>
+        (function () {
+            // Enhanced Mobile Menu and Navigation System
+            const header = document.querySelector('.nav-premium');
+            const navLinks = document.querySelectorAll('.nav-link-premium');
+            const hamburgerBtn = document.getElementById('hamburgerBtn');
+            const mobileMenu = document.getElementById('mobileMenu');
+            const mobileBackdrop = document.getElementById('mobileBackdrop');
+            const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+            const OFFSET_EXTRA = 8;
+
+            // Ensure all elements exist
+            if (!header || !hamburgerBtn || !mobileMenu || !mobileBackdrop) return;
+
+            // Helper: get current header height
+            function headerHeight() {
+                return header.getBoundingClientRect().height || 80;
+            }
+
+            // Enhanced smooth scroll accounting for header
+            function scrollToHash(hash) {
+                if (!hash) return;
+                const target = document.querySelector(hash);
+                if (!target) return;
+
+                const top = window.scrollY + target.getBoundingClientRect().top - headerHeight() - OFFSET_EXTRA;
+                window.scrollTo({ 
+                    top: Math.max(0, Math.floor(top)), 
+                    behavior: 'smooth' 
+                });
+            }
+
+            // Mobile Menu Toggle Functions
+            function openMobileMenu() {
+                mobileMenu.classList.add('active');
+                mobileBackdrop.classList.add('active');
+                hamburgerBtn.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+
+            function closeMobileMenu() {
+                mobileMenu.classList.remove('active');
+                mobileBackdrop.classList.remove('active');
+                hamburgerBtn.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+
+            // Mobile Menu Event Listeners
+            hamburgerBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                if (mobileMenu.classList.contains('active')) {
+                    closeMobileMenu();
+                } else {
+                    openMobileMenu();
+                }
+            });
+
+            // Close mobile menu when backdrop is clicked
+            mobileBackdrop.addEventListener('click', closeMobileMenu);
+
+            // Close mobile menu when clicking outside
+            document.addEventListener('click', function(e) {
+                if (!mobileMenu.contains(e.target) && !hamburgerBtn.contains(e.target)) {
+                    closeMobileMenu();
+                }
+            });
+
+            // Handle mobile navigation links
+            mobileNavLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    const href = this.getAttribute('href');
+                    if (href && href.startsWith('#')) {
+                        e.preventDefault();
+                        closeMobileMenu();
+                        setTimeout(() => {
+                            history.pushState(null, '', href);
+                            scrollToHash(href);
+                        }, 300); // Allow menu animation to complete
+                    }
+                });
+            });
+
+            // Enhanced desktop navigation
+            document.querySelectorAll('a[href^="#"]').forEach(a => {
+                const href = a.getAttribute('href');
+                if (href === '#' || href === '' || a.classList.contains('mobile-nav-link')) return;
+                
+                a.addEventListener('click', function (e) {
+                    const isSamePage = location.pathname === a.pathname && location.hostname === a.hostname;
+                    if (!isSamePage) return;
+                    e.preventDefault();
+                    history.pushState(null, '', href);
+                    scrollToHash(href);
+                });
+            });
+
+            // Handle initial page load with hash
+            window.addEventListener('load', function () {
+                if (location.hash) {
+                    setTimeout(() => scrollToHash(location.hash), 100);
+                }
+            });
+
+            // Enhanced scroll handling with better sticky behavior
+            let lastScroll = 0;
+            let ticking = false;
+
+            function onScroll() {
+                const currentScroll = window.scrollY || window.pageYOffset;
+                
+                // Enhanced sticky header behavior
+                if (currentScroll > 50) {
+                    header.classList.add('nav-scrolled');
+                } else {
+                    header.classList.remove('nav-scrolled');
+                }
+
+                // Update active navigation links
+                const sections = document.querySelectorAll('section[id]');
+                let current = '';
+                
+                sections.forEach(section => {
+                    const rect = section.getBoundingClientRect();
+                    const sectionTop = rect.top - headerHeight();
+                    const sectionBottom = rect.bottom - headerHeight();
+                    
+                    // Section is considered active if it's prominently in view
+                    if (sectionTop <= 100 && sectionBottom > 100) {
+                        current = section.id;
+                    }
+                });
+
+                // Update desktop nav active states
+                navLinks.forEach(link => {
+                    link.classList.remove('text-yellow-500');
+                    const href = link.getAttribute('href') || '';
+                    if (href.substring(1) === current) {
+                        link.classList.add('text-yellow-500');
+                    }
+                });
+
+                lastScroll = currentScroll;
+            }
+
+            // Throttled scroll handler
+            window.addEventListener('scroll', function () {
+                if (!ticking) {
+                    window.requestAnimationFrame(function () {
+                        onScroll();
+                        ticking = false;
+                    });
+                    ticking = true;
+                }
+            }, { passive: true });
+
+            // Handle escape key to close mobile menu
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && mobileMenu.classList.contains('active')) {
+                    closeMobileMenu();
+                }
+            });
+
+            // Handle window resize
+            let resizeTimer;
+            window.addEventListener('resize', function() {
+                clearTimeout(resizeTimer);
+                resizeTimer = setTimeout(function() {
+                    // Close mobile menu on resize to desktop
+                    if (window.innerWidth > 1024 && mobileMenu.classList.contains('active')) {
+                        closeMobileMenu();
+                    }
+                }, 100);
+            });
+
+            // Counter Animation (enhanced)
+            function animateCounters() {
+                const counters = document.querySelectorAll('.stats-premium');
+                if (!('IntersectionObserver' in window) || counters.length === 0) return;
+                
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            const counter = entry.target;
+                            const targetText = counter.textContent || '';
+                            const numericTarget = parseInt(targetText.replace(/\D/g, ''), 10) || 0;
+                            let current = 0;
+                            const duration = 2000; // 2 seconds
+                            const steps = 60;
+                            const increment = numericTarget / steps;
+                            const stepDuration = duration / steps;
+
+                            const updateCounter = () => {
+                                current += increment;
+                                if (current < numericTarget) {
+                                    counter.textContent = targetText.replace(/\d+/, Math.floor(current));
+                                    setTimeout(updateCounter, stepDuration);
+                                } else {
+                                    counter.textContent = targetText;
+                                }
+                            };
+
+                            updateCounter();
+                            observer.unobserve(counter);
+                        }
+                    });
+                }, { threshold: 0.5 });
+                
+                counters.forEach(c => observer.observe(c));
+            }
+
+            // Enhanced Card Animations
+            function initCardAnimations() {
+                const cards = document.querySelectorAll('.card-premium');
+                if (!('IntersectionObserver' in window) || cards.length === 0) return;
+                
+                const cardObserver = new IntersectionObserver((entries) => {
+                    entries.forEach((entry, index) => {
+                        if (entry.isIntersecting) {
+                            setTimeout(() => {
+                                entry.target.style.transform = 'translateY(0)';
+                                entry.target.style.opacity = '1';
+                            }, index * 100);
+                        }
+                    });
+                }, { threshold: 0.1 });
+
+                cards.forEach(card => {
+                    card.style.transform = 'translateY(30px)';
+                    card.style.opacity = '0';
+                    card.style.transition = 'all 0.8s cubic-bezier(0.4, 0, 0.2, 1)';
+                    cardObserver.observe(card);
+                });
+            }
+
+            // Enhanced Form Handling
+            const form = document.querySelector('form');
+            if (form) {
+                form.addEventListener('submit', function (e) {
+                    e.preventDefault();
+                    
+                    // Show success message
+                    const successMessage = document.createElement('div');
+                    successMessage.className = 'fixed top-24 right-6 bg-green-500 text-white px-6 py-4 rounded-lg shadow-lg z-50 transform translate-x-full opacity-0';
+                    successMessage.innerHTML = '<i class="fas fa-check mr-2"></i>Premium consultation request submitted successfully!';
+                    document.body.appendChild(successMessage);
+                    
+                    // Animate in
+                    setTimeout(() => {
+                        successMessage.style.transform = 'translateX(0)';
+                        successMessage.style.opacity = '1';
+                        successMessage.style.transition = 'all 0.3s ease';
+                    }, 100);
+                    
+                    // Animate out and remove
+                    setTimeout(() => {
+                        successMessage.style.transform = 'translateX(100%)';
+                        successMessage.style.opacity = '0';
+                        setTimeout(() => successMessage.remove(), 300);
+                    }, 3000);
+                    
+                    form.reset();
+                });
+            }
+
+            // Initialize everything on DOM ready
+            document.addEventListener('DOMContentLoaded', function () {
+                animateCounters();
+                initCardAnimations();
+                onScroll(); // Initial scroll state
+                document.body.classList.add('loaded');
+            });
+
+            // Initialize immediately if DOM is already loaded
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', function() {
+                    onScroll();
+                });
+            } else {
+                onScroll();
+            }
+        })();
+    </script>
+</body>
+</html>
